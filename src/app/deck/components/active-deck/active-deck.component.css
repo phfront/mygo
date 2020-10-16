@@ -1,0 +1,26 @@
+.deck-container {
+  border: 1px solid black;
+  width: 100%;
+}
+
+.deck-section {
+  border: 1px solid black;
+}
+
+.deck-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 5px 0px 5px;
+}
+
+.deck-cards {
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+  gap: 5px;
+  padding: 5px;
+}
+
+.deck-cards img {
+  width: 100%;
+  height: auto;
+}

@@ -1,0 +1,12 @@
+.active-deck {
+  display: flex;
+}
+
+.active-deck-preview {
+  width: 300px;
+}
+
+.active-deck-cards,
+.active-deck-search {
+  width: calc(50% - 150px);
+}

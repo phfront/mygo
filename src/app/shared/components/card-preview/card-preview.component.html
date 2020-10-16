@@ -1,0 +1,21 @@
+<div class="card-preview" *ngIf="card">
+  <img class="big-image" [src]="bigImage" alt="">
+  <div class="images-small">
+    <img *ngFor="let img of card.card_images" [src]="img.image_url_small" alt="" (click)="setBigImage(img)">
+  </div>
+  <div>
+    <p *ngIf="card.name"><span>Nome:</span> {{ card.name }}</p>
+    <p *ngIf="card.type"><span>Tipo:</span> {{ card.type }}</p>
+    <p *ngIf="card.atk"><span>ATK:</span> {{ card.atk }}</p>
+    <p *ngIf="card.def"><span>DEF:</span> {{ card.def }}</p>
+    <p *ngIf="card.level"><span>Level:</span> {{ card.level }}</p>
+    <p *ngIf="card.race"><span>Raça:</span> {{ card.race }}</p>
+    <p *ngIf="card.attribute"><span>Atributo:</span> {{ card.attribute }}</p>
+    <p *ngIf="card.archetype"><span>Arquétipo:</span> {{ card.archetype }}</p>
+    <p *ngIf="card.scale"><span>Escala:</span> {{ card.scale }}</p>
+    <div class="description">
+      <span>Descrição:</span>
+      <div>{{ card.desc }}</div>
+    </div>
+  </div>
+</div>

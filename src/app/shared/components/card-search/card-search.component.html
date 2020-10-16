@@ -1,0 +1,38 @@
+<div class="container" #container>
+  <div class="search">
+    <input type="text" [formControl]="search">
+    <button>Pesquisar</button>
+    <label for="display-mode-list">
+      <input type="radio" name="dispay-mode" id="display-mode-list" value="list" [(ngModel)]="displayMode">
+      Lista
+    </label>
+    <label for="display-mode-grid">
+      <input type="radio" name="dispay-mode" id="display-mode-grid" value="grid" [(ngModel)]="displayMode">
+      Grid
+    </label>
+    <select [formControl]="sortBy">
+      <option value="name">Nome &#8593;</option>
+      <option value="-name">Nome &#8595;</option>
+      <option value="type">Tipo &#8593;</option>
+      <option value="-type">Tipo &#8595;</option>
+      <option value="level">Level &#8593;</option>
+      <option value="-level">Level &#8595;</option>
+      <option value="race">Raça &#8593;</option>
+      <option value="-race">Raça &#8595;</option>
+      <option value="attribute">Atributo &#8593;</option>
+      <option value="-attribute">Atributo &#8595;</option>
+    </select>
+  </div>
+  <br>
+  <div class="results">
+    <div class="card-list" *ngIf="displayMode === 'list'">
+      <app-card-list (mouseenter)="cardHover.emit(card)" (click)="cardClick.emit(card)" *ngFor="let card of cardList"
+        [card]="card">
+      </app-card-list>
+    </div>
+    <div class="card-grid" *ngIf="displayMode === 'grid'">
+      <img (mouseenter)="cardHover.emit(card)" (click)="cardClick.emit(card)" *ngFor="let card of cardList"
+        [src]="card.card_images[0].image_url_small" alt="">
+    </div>
+  </div>
+</div>

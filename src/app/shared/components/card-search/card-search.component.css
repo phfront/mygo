@@ -1,0 +1,30 @@
+.container {
+  width: 100%;
+  height: calc(100vh - 130px);
+  padding: 20px;
+  overflow: auto;
+}
+
+.results {
+  display: flex;
+}
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.card-grid {
+  overflow: auto;
+  display: grid;
+  grid-template-columns: repeat(6, calc(100% / 6.5));
+  gap: 5px;
+  margin-right: 10px;
+}
+
+.card-grid img {
+  width: 100%;
+  height: auto;
+}

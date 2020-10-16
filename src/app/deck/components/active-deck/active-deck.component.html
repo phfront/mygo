@@ -1,0 +1,32 @@
+<div class="deck-container">
+  <section class="deck-section">
+    <div class="deck-header">
+      <span>Main</span>
+      <span>{{ getMainCardsInfo(deck.main) }}</span>
+    </div>
+    <div class="deck-cards">
+      <img *ngFor="let card of deck.main" [src]="card.card_images[0].image_url_small" alt=""
+        (mouseenter)="cardHover.emit(card)">
+    </div>
+  </section>
+  <section class="deck-section">
+    <div class="deck-header">
+      <span>Extra</span>
+      <span>{{ getExtraCardsInfo(deck.extra) }}</span>
+    </div>
+    <div class="deck-cards">
+      <img *ngFor="let card of deck.extra" [src]="card.card_images[0].image_url_small" alt=""
+        (mouseenter)="cardHover.emit(card)">
+    </div>
+  </section>
+  <section class="deck-section">
+    <div class="deck-header">
+      <span>Apoio</span>
+      <span>{{ getMainCardsInfo(deck.side) }}</span>
+    </div>
+    <div class="deck-cards">
+      <img *ngFor="let card of deck.side" [src]="card.card_images[0].image_url_small" alt=""
+        (mouseenter)="cardHover.emit(card)">
+    </div>
+  </section>
+</div>
