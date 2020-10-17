@@ -1,0 +1,21 @@
+<div class="card" (mouseenter)="cardHover.emit(card)">
+  <img [src]="card.card_images[0].image_url_small" alt="">
+  <div class="card-info">
+    <p><span>Nome:</span> {{ card.name }}</p>
+    <p><span>Tipo:</span> {{ card.type }}</p>
+    <p><span>Qtd:</span> {{ card.count }}</p>
+    <p *ngFor="let price of card.card_prices">
+      <span>Preço: </span>
+      [
+      <span>CM</span> {{ price.cardmarket_price | currency }},
+      <span>TC</span> {{ price.tcgplayer_price | currency }},
+      <span>EB</span> {{ price.ebay_price | currency }},
+      <span>AM</span> {{ price.amazon_price | currency }},
+      <span>CS</span> {{ price.coolstuffinc_price | currency }}
+      ]
+    </p>
+  </div>
+  <div class="card-actions">
+    <button (click)="cardRemove.emit(card)">Remover</button>
+  </div>
+</div>

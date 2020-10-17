@@ -21,21 +21,29 @@ export interface YPDCardListPrice {
 }
 
 export interface YPDCardList {
-  id: number;
-  name: string;
-  type: string;
-  desc: string;
-  race: string;
-  name_en: string;
-  archetype: string;
-  atk: number;
-  def: number;
-  level: number;
-  attribute: string;
-  scale: number;
-  card_sets: Array<YPDCardListSet>;
-  card_images: Array<YPDCardListImage>;
-  card_prices: Array<YPDCardListPrice>;
+  id?: number;
+  name?: string;
+  type?: string;
+  desc?: string;
+  race?: string;
+  name_en?: string;
+  archetype?: string;
+  atk?: number;
+  def?: number;
+  level?: number;
+  attribute?: string;
+  scale?: number;
+  linkval?: number;
+  linkmarkers?: Array<string>;
+  card_sets?: Array<YPDCardListSet>;
+  card_images?: Array<YPDCardListImage>;
+  card_prices?: Array<YPDCardListPrice>;
+  banlist_info?: {
+    ban_goat?: string;
+    ban_ocg?: string;
+    ban_tcg?: string;
+  };
+  count?: number;
 }
 
 export interface Deck {

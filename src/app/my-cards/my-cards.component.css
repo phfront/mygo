@@ -1,0 +1,23 @@
+.my-cards {
+  display: flex;
+}
+
+.my-cards-preview {
+  width: 300px;
+}
+
+.my-cards-cards,
+.my-cards-search {
+  width: calc(50% - 150px);
+}
+
+.my-cards-cards {
+  height: 100vh;
+  overflow: auto;
+}
+
+.my-cards-header {
+  height: 50px;
+  display: flex;
+  align-items: center;
+}

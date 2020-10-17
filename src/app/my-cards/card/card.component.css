@@ -1,0 +1,21 @@
+.card {
+  display: flex;
+  align-items: center;
+}
+
+.card img {
+  height: 100px;
+  width: auto;
+  margin-right: 10px;
+}
+
+.card-info {
+  flex-grow: 1;
+}
+
+.card-info p span {
+  font-weight: bold;
+}
+
+.card-actions {
+}

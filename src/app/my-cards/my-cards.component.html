@@ -1,1 +1,13 @@
-<p>my-cards works 2!</p>
+<div class="my-cards">
+  <app-card-preview class="my-cards-preview" [card]="cardPreview"></app-card-preview>
+  <div class="my-cards-cards">
+    <div class="my-cards-header">
+      <input type="text" [formControl]="cardSearch">
+      <button (click)="saveList()">Salvar lista</button>
+    </div>
+    <app-card *ngFor="let card of cardListFiltered" (cardHover)="cardPreview = $event" (cardRemove)="removeCard($event)"
+      [card]="card"></app-card>
+  </div>
+  <app-card-search class="my-cards-search" (cardHover)="cardPreview = $event" (cardClick)="addCard($event)">
+  </app-card-search>
+</div>
