@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { YgoprodeckService } from '../shared/services/ygoprodeck.service';
 import { Deck, YPDCardList } from '../shared/interfaces/ygoprodeck';
 import { DeckService } from '../shared/services/deck.service';
+import * as CARD_MOVE from '../../assets/js/cardMove.js';
 
 @Component({
   selector: 'app-deck',
@@ -15,6 +16,8 @@ export class DeckComponent implements OnInit {
   activeDeck: Deck;
   newDeckName: string = '';
   cardPreview: YPDCardList;
+  areaMoveAttribute: string = 'card-move-area';
+  moveHandler = CARD_MOVE.create(this.areaMoveAttribute);
 
   constructor(
     private ygoprodeckService: YgoprodeckService,
@@ -173,6 +176,7 @@ export class DeckComponent implements OnInit {
         },
       ],
     };
+    this.initMove();
   }
 
   modalCardSelect(card: YPDCardList) {
@@ -214,5 +218,15 @@ export class DeckComponent implements OnInit {
       this.activeDeck = this.decks[0];
     };
     fileReader.readAsText(files[0]);
+  }
+
+  initMove() {
+    setTimeout(() => {
+      this.moveHandler.initCardMove(this.moveHandler);
+    }, 100);
+  }
+
+  searchEvent(list: YPDCardList[]) {
+    this.initMove();
   }
 }

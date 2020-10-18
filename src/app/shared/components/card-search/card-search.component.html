@@ -15,24 +15,31 @@
       <option value="-name">Nome &#8595;</option>
       <option value="type">Tipo &#8593;</option>
       <option value="-type">Tipo &#8595;</option>
-      <option value="level">Level &#8593;</option>
+      <!-- <option value="level">Level &#8593;</option>
       <option value="-level">Level &#8595;</option>
       <option value="race">Raça &#8593;</option>
       <option value="-race">Raça &#8595;</option>
       <option value="attribute">Atributo &#8593;</option>
-      <option value="-attribute">Atributo &#8595;</option>
+      <option value="-attribute">Atributo &#8595;</option> -->
     </select>
   </div>
   <br>
   <div class="results">
-    <div class="card-list" *ngIf="displayMode === 'list'">
-      <app-card-list (mouseenter)="cardHover.emit(card)" (click)="cardClick.emit(card)" *ngFor="let card of cardList"
-        [card]="card">
-      </app-card-list>
+    <div class="card-list" [class.hidden]="displayMode !== 'list'">
+      <div class="card-list-item" *ngFor="let card of cardList" (mouseenter)="cardHover.emit(card)">
+        <div card-move-area extract-mode>
+          <div class="card-move" [ngStyle]="{ backgroundImage: 'url('+card.card_images[0].image_url_small+')' }"></div>
+        </div>
+        <div class="card-list-item-info">
+          <p><span>Nome:</span> {{ card.name }}</p>
+          <p><span>Tipo:</span> {{ card.type }}</p>
+        </div>
+      </div>
+
     </div>
-    <div class="card-grid" *ngIf="displayMode === 'grid'">
-      <img (mouseenter)="cardHover.emit(card)" (click)="cardClick.emit(card)" *ngFor="let card of cardList"
-        [src]="card.card_images[0].image_url_small" alt="">
+    <div class="card-grid" card-move-area extract-mode [class.hidden]="displayMode !== 'grid'">
+      <div *ngFor="let card of cardList" class="card-move" (mouseenter)="cardHover.emit(card)"
+        [ngStyle]="{ backgroundImage: 'url('+card.card_images[0].image_url_small+')' }"></div>
     </div>
   </div>
 </div>

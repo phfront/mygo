@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0px;
+      margin: 0px;
+    }
+  </style>
+</head>
+
+<body>
+  <input type="file" multiple onchange="loadFiles(this)">
+  <div id="images"></div>
+  <script src='https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js'></script>
+  <script>
+    function loadFiles(input) {
+      for (let i = 0; i < input.files.length; i++) {
+        const file = input.files[i];
+        loadImage(file);
+      }
+    }
+
+    function loadImage(file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const image = new Image();
+        image.onload = () => {
+          const canvas = document.createElement('canvas');
+          canvas.width = image.width;
+          canvas.height = image.height / 2;
+          canvas.style.background = 'black'
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(
+            image,
+            0,
+            0,
+            canvas.width,
+            canvas.height,
+            0,
+            0,
+            canvas.width,
+            canvas.height
+          );
+          const imageElement = new Image();
+          imageElement.onload = () => {
+            document.getElementById('images').append(imageElement);
+            const worker = Tesseract.createWorker({
+              logger: m => { }
+            });
+
+            (async () => {
+              await worker.load();
+              await worker.loadLanguage('por');
+              await worker.initialize('por');
+              const { data: { text } } = await worker.recognize(imageElement);
+              console.log(text.split('\n')[0]);
+              await worker.terminate();
+            })();
+          }
+          imageElement.src = canvas.toDataURL();
+        }
+        image.src = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
+</body>
+
+</html>

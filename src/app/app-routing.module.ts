@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/my-cards', pathMatch: 'full' },
+  { path: '', redirectTo: '/deck', pathMatch: 'full' },
   {
     path: 'deck',
     loadChildren: () => import('./deck/deck.module').then((m) => m.DeckModule),

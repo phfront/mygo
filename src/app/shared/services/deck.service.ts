@@ -10,8 +10,6 @@ export class DeckService {
   constructor(private ygoprodeckService: YgoprodeckService) {}
 
   ydk2Deck(deckName, ydkFile: Array<string>): Deck {
-    console.log(ydkFile);
-
     const deck: Deck = {
       name: deckName,
       createdBy: '',

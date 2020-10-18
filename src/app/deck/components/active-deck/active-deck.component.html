@@ -4,9 +4,9 @@
       <span>Main</span>
       <span>{{ getMainCardsInfo(deck.main) }}</span>
     </div>
-    <div class="deck-cards">
-      <img *ngFor="let card of deck.main" [src]="card.card_images[0].image_url_small" alt=""
-        (mouseenter)="cardHover.emit(card)">
+    <div class="deck-cards" card-move-area>
+      <div *ngFor="let card of deck.main" class="card-move" (mouseenter)="cardHover.emit(card)"
+        [ngStyle]="{ backgroundImage: 'url('+card.card_images[0].image_url_small+')' }"></div>
     </div>
   </section>
   <section class="deck-section">
@@ -14,9 +14,9 @@
       <span>Extra</span>
       <span>{{ getExtraCardsInfo(deck.extra) }}</span>
     </div>
-    <div class="deck-cards">
-      <img *ngFor="let card of deck.extra" [src]="card.card_images[0].image_url_small" alt=""
-        (mouseenter)="cardHover.emit(card)">
+    <div class="deck-cards" card-move-area>
+      <div *ngFor="let card of deck.extra" class="card-move" (mouseenter)="cardHover.emit(card)"
+        [ngStyle]="{ backgroundImage: 'url('+card.card_images[0].image_url_small+')' }"></div>
     </div>
   </section>
   <section class="deck-section">
@@ -24,9 +24,9 @@
       <span>Apoio</span>
       <span>{{ getMainCardsInfo(deck.side) }}</span>
     </div>
-    <div class="deck-cards">
-      <img *ngFor="let card of deck.side" [src]="card.card_images[0].image_url_small" alt=""
-        (mouseenter)="cardHover.emit(card)">
+    <div class="deck-cards" card-move-area>
+      <div *ngFor="let card of deck.side" class="card-move" (mouseenter)="cardHover.emit(card)"
+        [ngStyle]="{ backgroundImage: 'url('+card.card_images[0].image_url_small+')' }"></div>
     </div>
   </section>
 </div>

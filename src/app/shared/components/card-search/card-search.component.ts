@@ -18,14 +18,16 @@ import { YgoprodeckService } from '../../services/ygoprodeck.service';
   styleUrls: ['./card-search.component.css'],
 })
 export class CardSearchComponent implements OnInit {
+  @Input() moveattribute: string;
   @ViewChild('container') container: ElementRef;
   @Output() cardClick = new EventEmitter();
   @Output() cardHover = new EventEmitter();
+  @Output() searchEvent = new EventEmitter();
   cardList: YPDCardList[] = [];
 
-  displayMode: 'list' | 'grid' = 'grid';
+  displayMode: 'list' | 'grid' = 'list';
   search = new FormControl('mago');
-  sortBy = new FormControl('level');
+  sortBy = new FormControl('name');
 
   constructor(private ygoprodeckService: YgoprodeckService) {}
 
@@ -45,6 +47,7 @@ export class CardSearchComponent implements OnInit {
       .pipe(take(1))
       .subscribe((response: { data: YPDCardList[] }) => {
         this.cardList = response.data;
+        this.searchEvent.emit(response.data);
         this.sortCards();
       });
   }

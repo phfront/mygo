@@ -1,0 +1,12 @@
+.card-from {
+  background-color: transparent;
+}
+
+.card-to {
+  background-color: lightgreen;
+}
+
+.card-move {
+  background-size: cover;
+  user-select: none;
+}
