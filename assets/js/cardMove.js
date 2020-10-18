@@ -63,8 +63,9 @@ export const create = attribute => {
           from: null,
           to: null
         }
-        if (!dropArea.hasAttribute('extract-mode')) {
-          if (dropArea) {
+        let extractMode = false;
+        if (dropArea) {
+          if (!dropArea.hasAttribute('extract-mode')) {
             const dropTo = document.elementsFromPoint(event.clientX, event.clientY).find(
               element =>
                 element.classList.contains('card-to') ||
@@ -81,21 +82,24 @@ export const create = attribute => {
               dropArea.appendChild(event.target);
             }
             areas.to = event.target.parentElement;
+          } else {
+            extractMode = true;
           }
-          event.target.style.removeProperty('top');
-          event.target.style.removeProperty('left');
-          event.target.style.removeProperty('position');
-          event.target.style.removeProperty('z-index');
-          if (areas.from && areas.to) {
-            this.reorderAreaIds(areas.from);
-            this.reorderAreaIds(areas.to);
-            if (areas.from.getAttribute(`${this.attribute}-id`) === areas.to.getAttribute(`${this.attribute}-id`)) {
-              this.doEvents.moveSameArea(this, areas.to);
-            } else {
-              this.doEvents.moveDifferentAreas(this, areas.from, areas.to);
-            }
+        }
+        event.target.style.removeProperty('top');
+        event.target.style.removeProperty('left');
+        event.target.style.removeProperty('position');
+        event.target.style.removeProperty('z-index');
+        if (areas.from && areas.to) {
+          this.reorderAreaIds(areas.from);
+          this.reorderAreaIds(areas.to);
+          if (areas.from.getAttribute(`${this.attribute}-id`) === areas.to.getAttribute(`${this.attribute}-id`)) {
+            this.doEvents.moveSameArea(this, areas.to);
+          } else {
+            this.doEvents.moveDifferentAreas(this, areas.from, areas.to);
           }
-        } else {
+        }
+        if (extractMode) {
           event.target.remove();
         }
         document.querySelectorAll('.card-to').forEach(e => e.remove())
@@ -111,10 +115,12 @@ export const create = attribute => {
     initArea: function (that, area, areaId) {
       for (let i = 0; i < area.children.length; i++) {
         const child = area.children[i];
-        child.setAttribute(`${this.attribute}-item`, true);
-        child.setAttribute(`${this.attribute}-id`, areaId);
-        child.setAttribute(`${this.attribute}-item-id`, `${areaId}-${i}`);
-        child.addEventListener('mousedown', that.itemMouseDown.bind(that));
+        if (!child.hasAttribute(`${this.attribute}-item`)) {
+          child.setAttribute(`${this.attribute}-item`, true);
+          child.setAttribute(`${this.attribute}-id`, areaId);
+          child.setAttribute(`${this.attribute}-item-id`, `${areaId}-${i}`);
+          child.addEventListener('mousedown', that.itemMouseDown.bind(that));
+        }
       }
     },
     initCardMove: function (that) {
