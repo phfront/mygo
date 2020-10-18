@@ -223,7 +223,7 @@ export class DeckComponent implements OnInit {
   initMove() {
     setTimeout(() => {
       this.moveHandler.initCardMove(this.moveHandler);
-    }, 100);
+    }, 500);
   }
 
   searchEvent(list: YPDCardList[]) {
