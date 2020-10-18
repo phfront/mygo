@@ -137,34 +137,6 @@ export class DeckComponent implements OnInit {
           image_url_small:
             'https://storage.googleapis.com/ygoprodeck.com/pics_small/97631303.jpg',
         },
-        {
-          id: 97631303,
-          image_url:
-            'https://storage.googleapis.com/ygoprodeck.com/pics/97631303.jpg',
-          image_url_small:
-            'https://storage.googleapis.com/ygoprodeck.com/pics_small/97631303.jpg',
-        },
-        {
-          id: 97631303,
-          image_url:
-            'https://storage.googleapis.com/ygoprodeck.com/pics/97631303.jpg',
-          image_url_small:
-            'https://storage.googleapis.com/ygoprodeck.com/pics_small/97631303.jpg',
-        },
-        {
-          id: 97631303,
-          image_url:
-            'https://storage.googleapis.com/ygoprodeck.com/pics/97631303.jpg',
-          image_url_small:
-            'https://storage.googleapis.com/ygoprodeck.com/pics_small/97631303.jpg',
-        },
-        {
-          id: 97631303,
-          image_url:
-            'https://storage.googleapis.com/ygoprodeck.com/pics/97631303.jpg',
-          image_url_small:
-            'https://storage.googleapis.com/ygoprodeck.com/pics_small/97631303.jpg',
-        },
       ],
       card_prices: [
         {
@@ -223,7 +195,7 @@ export class DeckComponent implements OnInit {
   initMove() {
     setTimeout(() => {
       this.moveHandler.initCardMove(this.moveHandler);
-    }, 500);
+    }, 1000);
   }
 
   searchEvent(list: YPDCardList[]) {
