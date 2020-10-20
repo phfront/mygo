@@ -19,5 +19,6 @@
 .my-cards-header {
   height: 50px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }

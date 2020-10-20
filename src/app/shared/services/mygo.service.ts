@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { IMygoCard } from '../interfaces/mygoapi';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,10 @@ export class MygoService {
       username,
       password,
     });
+  }
+
+  logout() {
+    localStorage.removeItem('token');
   }
 
   verifyToken() {
@@ -40,5 +45,25 @@ export class MygoService {
       password,
       confirmPassword,
     });
+  }
+
+  myDecks() {
+    return this.http.get(`${environment.mygoApi}user/deck`);
+  }
+
+  deck(deckId: string) {
+    return this.http.get(`${environment.mygoApi}deck/${deckId}`);
+  }
+
+  user() {
+    return this.http.get(`${environment.mygoApi}user/info`);
+  }
+
+  myCards() {
+    return this.http.get(`${environment.mygoApi}user/mycards`);
+  }
+
+  updateMyCards(cards: IMygoCard[]) {
+    return this.http.put(`${environment.mygoApi}user/mycards`, { cards });
   }
 }

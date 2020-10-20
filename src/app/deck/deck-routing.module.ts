@@ -4,7 +4,11 @@ import { AuthGuardService } from '../core/auth-guard.service';
 import { DeckComponent } from './deck.component';
 
 const routes: Routes = [
-  { path: '', component: DeckComponent, canActivate: [AuthGuardService] },
+  {
+    path: '',
+    component: DeckComponent,
+    canActivate: [AuthGuardService],
+  },
 ];
 
 @NgModule({

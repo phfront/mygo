@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { IMygoDeck } from 'src/app/shared/interfaces/mygoapi';
 import { Deck, YPDCardList } from 'src/app/shared/interfaces/ygoprodeck';
 
 @Component({
@@ -7,7 +8,7 @@ import { Deck, YPDCardList } from 'src/app/shared/interfaces/ygoprodeck';
   styleUrls: ['./active-deck.component.css'],
 })
 export class ActiveDeckComponent implements OnInit {
-  @Input() deck: Deck;
+  @Input() deck: IMygoDeck;
   @Output() cardHover = new EventEmitter();
 
   constructor() {}

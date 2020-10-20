@@ -1,1 +1,19 @@
-<p>home works!</p>
+<section *ngIf="user">
+  <h1>Usuario</h1>
+  <p>ID: {{ user._id }}</p>
+  <p>Username: {{ user.username }}</p>
+  <p>Nome: {{ user.name }}</p>
+  <p>Email: {{ user.email }}</p>
+</section>
+<br>
+<section>
+  <button (click)="myCards()">Minhas cartas</button>
+</section>
+<br>
+<section>
+  <h1>Decks</h1>
+  <p *ngFor="let deck of decks">
+    {{ deck.name }} ( {{ deck.createdBy }} )
+    <button (click)="editDeck(deck)">Editar deck</button>
+  </p>
+</section>

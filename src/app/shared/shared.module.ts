@@ -11,6 +11,7 @@ import { CardListComponent } from './components/card-search/card-list/card-list.
 import { CardSearchMoveComponent } from './components/card-search-move/card-search-move.component';
 import { MygoService } from './services/mygo.service';
 import { HttpInterceptorService } from '../core/http-interceptor.service';
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,13 @@ import { HttpInterceptorService } from '../core/http-interceptor.service';
     CardListComponent,
     CardPreviewComponent,
   ],
-  imports: [CommonModule, HttpClientModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ComponentsModule,
+  ],
   exports: [
     CommonModule,
     CaptureComponent,
@@ -29,6 +36,7 @@ import { HttpInterceptorService } from '../core/http-interceptor.service';
     CardPreviewComponent,
     FormsModule,
     ReactiveFormsModule,
+    ComponentsModule,
   ],
   providers: [
     YgoprodeckService,

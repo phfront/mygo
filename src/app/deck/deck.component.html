@@ -1,21 +1,8 @@
-<div>
-  <input type="text" [(ngModel)]="newDeckName" placeholder="Nome do novo deck">
-  <button (click)="addDeck()">Novo Deck</button>
-  <div>
-    <input type="file" name="" #inputImportDeck (change)="handleInputDeck($event.target.files)" style=" display: none;">
-    <button (click)="importDeck()">Importar Deck</button>
-  </div>
-  <br><br>
-  <label *ngFor="let deck of decks" for="{{ deck.name }}">
-    <input type="radio" name="deck-radio" id="{{ deck.name }}" (change)="setActiveDeck(deck)">
-    {{ deck.name }}
-  </label>
-</div>
-
-<div class="active-deck">
+<div class="active-deck" *ngIf="deck">
+  <h1>{{ deck.name }}</h1>
   <app-card-preview class="active-deck-preview" [card]="cardPreview"></app-card-preview>
-  <app-active-deck class="active-deck-cards" *ngIf="activeDeck" (cardHover)="cardPreview = $event" [deck]="activeDeck">
+  <app-active-deck class="active-deck-cards" (cardHover)="cardPreview = $event" [deck]="deck">
   </app-active-deck>
-  <app-card-search-move class="active-deck-search" *ngIf="activeDeck" (cardHover)="cardPreview = $event"
+  <app-card-search-move class="active-deck-search" (cardHover)="cardPreview = $event"
     (searchEvent)="searchEvent($event)" [moveattribute]="areaMoveAttribute"></app-card-search-move>
 </div>

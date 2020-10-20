@@ -4,11 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   { path: '', redirectTo: '/user/login', pathMatch: 'full' },
   {
-    path: 'deck',
+    path: 'deck/:deckId',
     loadChildren: () => import('./deck/deck.module').then((m) => m.DeckModule),
   },
   {
-    path: 'my-cards',
+    path: 'mycards',
     loadChildren: () =>
       import('./my-cards/my-cards.module').then((m) => m.MyCardsModule),
   },

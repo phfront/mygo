@@ -1,0 +1,11 @@
+.mygo-input {
+  background: transparent;
+  color: var(--color1);
+  padding: 10px;
+  border: 2px solid var(--color2);
+  outline: none;
+
+  &::placeholder {
+    color: var(--color1);
+  }
+}

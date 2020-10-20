@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { debounceTime, take } from 'rxjs/operators';
-import { YPDCardList } from '../shared/interfaces/ygoprodeck';
-import { MyCardsService } from './my-cards.service';
+import { take } from 'rxjs/operators';
+import { IMygoCard } from '../shared/interfaces/mygoapi';
+import { MygoService } from '../shared/services/mygo.service';
 
 @Component({
   selector: 'app-my-cards',
@@ -10,65 +10,79 @@ import { MyCardsService } from './my-cards.service';
   styleUrls: ['./my-cards.component.css'],
 })
 export class MyCardsComponent implements OnInit {
-  cardPreview: YPDCardList;
-  cardList: YPDCardList[] = [];
-  cardListFiltered: YPDCardList[] = [];
+  cardPreview: IMygoCard;
   cardSearch = new FormControl('');
+  cards: IMygoCard[] = [];
+  cardsFiltered: IMygoCard[] = [];
 
-  constructor(private myCardsService: MyCardsService) {}
+  constructor(private mygoService: MygoService) {}
 
   ngOnInit(): void {
-    this.myCardsService
-      .list()
+    this.mygoService
+      .myCards()
       .pipe(take(1))
-      .subscribe((response: { myCards: YPDCardList[] }) => {
-        this.cardList = response.myCards;
-        this.cardListFiltered = this.cardList;
-      });
-    this.cardSearch.valueChanges
-      .pipe(debounceTime(100))
-      .subscribe(() => this.filterList());
+      .subscribe(
+        (response: any) => {
+          this.cards = response.cards;
+          this.filterList();
+        },
+        (response: any) => {
+          alert(response.error.errors.join('|'));
+        }
+      );
   }
 
-  removeCard(card: YPDCardList) {
-    if (card.count > 1) {
+  removeCard(card: IMygoCard) {
+    if (card.count > 0) {
       card.count--;
-    } else {
-      this.cardList = this.cardList.filter((c) => c.id !== card.id);
       this.filterList();
     }
   }
 
   filterList() {
     if (this.cardSearch.value.replace(/ /g, '')) {
-      this.cardListFiltered = this.cardList.filter((card) =>
-        card.name.toLowerCase().includes(this.cardSearch.value.toLowerCase())
+      this.cardsFiltered = this.cards.filter(
+        (card) =>
+          card.name
+            .toLowerCase()
+            .includes(this.cardSearch.value.toLowerCase()) && card.count > 0
       );
     } else {
-      this.cardListFiltered = this.cardList;
+      this.cardsFiltered = this.cards;
     }
   }
 
-  addCard(card: YPDCardList) {
-    const found = this.cardList.find((c) => c.id === card.id);
-    if (found) {
-      found.count++;
-    } else {
-      card.count = 1;
-      this.cardList.push(card);
-      this.cardList.sort((a, b) => a.name.localeCompare(b.name));
-    }
+  addCard(card: IMygoCard) {
+    // const found = this.cardList.find((c) => c.id === card.id);
+    // if (found) {
+    //   found.count++;
+    // } else {
+    //   card.count = 1;
+    //   this.cardList.push(card);
+    //   this.cardList.sort((a, b) => a.name.localeCompare(b.name));
+    // }
   }
 
   saveList() {
-    this.myCardsService
-      .update(this.cardList)
+    this.mygoService
+      .updateMyCards(this.cards)
       .pipe(take(1))
       .subscribe(
         (response: any) => {
-          alert(response.success ? 'Lista salva' : 'Erro ao salvar lista');
+          console.log(response);
         },
-        (error) => alert('Erro ao salvar lista')
+        (response: any) => {
+          console.log(response);
+        }
       );
+    //   this.myCardsService
+    //     .update(this.cards)
+    //     .pipe(take(1))
+    //     .subscribe(
+    //       (response: any) => {
+    //         alert(response.success ? 'Lista salva' : 'Erro ao salvar lista');
+    //       },
+    //       (error) => alert('Erro ao salvar lista')
+    //     );
   }
 }

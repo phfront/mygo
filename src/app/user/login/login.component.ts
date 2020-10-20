@@ -7,15 +7,21 @@ import { MygoService } from 'src/app/shared/services/mygo.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  form = new FormBuilder().group({
-    username: [''],
-    password: [''],
-  });
+  form;
 
-  constructor(private mygoService: MygoService, private router: Router) {}
+  constructor(
+    private mygoService: MygoService,
+    private router: Router,
+    formBuilder: FormBuilder
+  ) {
+    this.form = formBuilder.group({
+      username: [''],
+      password: [''],
+    });
+  }
 
   ngOnInit(): void {
     if (localStorage.getItem('token')) {
