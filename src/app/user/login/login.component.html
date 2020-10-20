@@ -1,0 +1,21 @@
+<form [formGroup]="form" class="login-container" (submit)="login()">
+  <div>
+    <span>Username</span>
+    &nbsp;
+    <input type="text" formControlName="username">
+  </div>
+  <br>
+  <div>
+    <span>Password</span>
+    &nbsp;
+    <input type="password" formControlName="password">
+  </div>
+  <br>
+  <div>
+    <button type="submit" [disabled]="!form.valid">Login</button>
+    &nbsp;
+    <button type="button" (click)="register()">Registrar</button>
+    &nbsp;
+    <button type="button" (click)="forgotPassword()">Esqueci minha senha</button>
+  </div>
+</form>

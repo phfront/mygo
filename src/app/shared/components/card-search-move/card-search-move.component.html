@@ -1,7 +1,8 @@
 <div class="container" #container>
+  <div class="container-shadow" [ngStyle]="getShadowStyle()" *ngIf="loading">{{ loadingText }}</div>
   <div class="search">
-    <input type="text" [formControl]="search">
-    <button>Pesquisar</button>
+    <input type="text" [formControl]="search" (keyup)="keyUp($event)">
+    <button (click)="getCards()">Pesquisar</button>
     <!-- <label for="display-mode-list">
       <input type="radio" name="dispay-mode" id="display-mode-list" value="list" [(ngModel)]="displayMode">
       Lista
@@ -28,26 +29,13 @@
     <div class="card-list">
       <div class="card-list-item" *ngFor="let card of cardList" (mouseenter)="cardHover.emit(card)">
 
-        <div class="card-list-item-1-image" *ngIf="card.card_images.length <= 1" (click)="handleClick(card)">
-          <img [src]="card.card_images[0].image_url_small" alt="">
-          <div class="card-list-item-info">
-            <p><span>Nome:</span> {{ card.name }}</p>
-            <p><span>Tipo:</span> {{ card.type }}</p>
+        <div card-move-area extract-mode>
+          <div class="card-move" [ngStyle]="{ backgroundImage: 'url('+card.card_images[0].image_url_small+')' }">
           </div>
         </div>
-
-        <div class="card-list-item-more-images" *ngIf="card.card_images.length > 1">
-          <div class="card-list-item-more-images-all" (click)="card.expand = !card.expand">
-            <img [src]="card.card_images[0].image_url_small" alt="">
-            <div class="card-list-item-info">
-              <p><span>Nome:</span> {{ card.name }}</p>
-              <p><span>Tipo:</span> {{ card.type }}</p>
-            </div>
-          </div>
-          <div class="card-list-item-more-images-variations" *ngIf="card.expand">
-            <img *ngFor="let imageVariation of card.card_images" [src]="imageVariation.image_url_small" alt=""
-              (mouseenter)="enterImageVariation(card, imageVariation)" (click)="handleClick(card, imageVariation)">
-          </div>
+        <div class="card-list-item-info">
+          <p><span>Nome:</span> {{ card.name }}</p>
+          <p><span>Tipo:</span> {{ card.type }}</p>
         </div>
 
       </div>

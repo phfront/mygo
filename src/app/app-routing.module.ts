@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/deck', pathMatch: 'full' },
+  { path: '', redirectTo: '/user/login', pathMatch: 'full' },
   {
     path: 'deck',
     loadChildren: () => import('./deck/deck.module').then((m) => m.DeckModule),
@@ -11,6 +11,10 @@ const routes: Routes = [
     path: 'my-cards',
     loadChildren: () =>
       import('./my-cards/my-cards.module').then((m) => m.MyCardsModule),
+  },
+  {
+    path: 'user',
+    loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
   },
 ];
 

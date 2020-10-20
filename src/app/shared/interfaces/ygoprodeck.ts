@@ -44,6 +44,7 @@ export interface YPDCardList {
     ban_tcg?: string;
   };
   count?: number;
+  expand?: boolean;
 }
 
 export interface Deck {

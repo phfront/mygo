@@ -16,6 +16,6 @@
   <app-card-preview class="active-deck-preview" [card]="cardPreview"></app-card-preview>
   <app-active-deck class="active-deck-cards" *ngIf="activeDeck" (cardHover)="cardPreview = $event" [deck]="activeDeck">
   </app-active-deck>
-  <app-card-search class="active-deck-search" *ngIf="activeDeck" (cardHover)="cardPreview = $event"
-    (searchEvent)="searchEvent($event)" [moveattribute]="areaMoveAttribute"></app-card-search>
+  <app-card-search-move class="active-deck-search" *ngIf="activeDeck" (cardHover)="cardPreview = $event"
+    (searchEvent)="searchEvent($event)" [moveattribute]="areaMoveAttribute"></app-card-search-move>
 </div>

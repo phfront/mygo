@@ -22,4 +22,10 @@ export class YgoprodeckService {
       )}&language=pt`
     );
   }
+
+  id(id: number) {
+    return this.http.get(
+      `https://db.ygoprodeck.com/api/v7/cardinfo.php?id=${id}&language=pt`
+    );
+  }
 }

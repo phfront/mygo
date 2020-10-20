@@ -8,47 +8,90 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { debounceTime, take } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
+import { combineAll, debounceTime, take } from 'rxjs/operators';
 import { YPDCardList, YPDCardListImage } from '../../interfaces/ygoprodeck';
 import { YgoprodeckService } from '../../services/ygoprodeck.service';
 
 @Component({
-  selector: 'app-card-search',
-  templateUrl: './card-search.component.html',
-  styleUrls: ['./card-search.component.css'],
+  selector: 'app-card-search-move',
+  templateUrl: './card-search-move.component.html',
+  styleUrls: ['./card-search-move.component.css'],
 })
-export class CardSearchComponent implements OnInit {
+export class CardSearchMoveComponent implements OnInit {
   @Input() moveattribute: string;
   @ViewChild('container') container: ElementRef;
   @Output() cardClick = new EventEmitter();
   @Output() cardHover = new EventEmitter();
   @Output() searchEvent = new EventEmitter();
   cardList: YPDCardList[] = [];
-
+  loading: boolean = false;
+  loadingText: string = '';
   displayMode: 'list' | 'grid' = 'list';
-  search = new FormControl('Mago Negro');
+  search = new FormControl('dragao');
   sortBy = new FormControl('name');
 
   constructor(private ygoprodeckService: YgoprodeckService) {}
 
   ngOnInit(): void {
-    this.search.valueChanges.pipe(debounceTime(500)).subscribe(() => {
-      this.getCards();
-    });
     this.sortBy.valueChanges.subscribe(() => {
       this.sortCards();
     });
-    this.getCards();
+  }
+
+  keyUp(event) {
+    if (event.code === 'NumpadEnter' || event.code === 'Enter') {
+      this.getCards();
+    }
   }
 
   getCards() {
+    this.loading = true;
+    this.loadingText = 'Buscando cartas...';
     this.ygoprodeckService
       .fname(this.search.value)
       .pipe(take(1))
       .subscribe((response: { data: YPDCardList[] }) => {
-        this.cardList = response.data;
-        this.searchEvent.emit(response.data);
-        this.sortCards();
+        this.cardList = [];
+        const requests = [];
+        response.data.forEach((card) => {
+          if (card.card_images.length > 1) {
+            card.card_images.forEach((image) => {
+              requests.push(this.ygoprodeckService.id(image.id));
+            });
+          } else {
+            this.cardList.push(card);
+          }
+        });
+        if (requests.length) {
+          this.loadingText = 'Buscando variações de cartas...';
+          this.getVariations(requests, () => {
+            this.loading = false;
+            this.searchEvent.emit('done');
+            this.sortCards();
+          });
+        } else {
+          this.loading = false;
+          this.searchEvent.emit('done');
+          this.sortCards();
+        }
+      });
+  }
+
+  getVariations(requests, cb) {
+    forkJoin(requests.splice(0, 10))
+      .pipe(take(1))
+      .subscribe((responseVariation: { data: YPDCardList[] }[]) => {
+        this.cardList = this.cardList.concat(
+          responseVariation.map((r) => r.data[0])
+        );
+        if (requests.length) {
+          setTimeout(() => {
+            this.getVariations(requests, cb);
+          }, 1000);
+        } else {
+          cb();
+        }
       });
   }
 
@@ -103,5 +146,22 @@ export class CardSearchComponent implements OnInit {
       (image) => image.id === variation.id
     );
     this.cardHover.emit(newCard);
+  }
+
+  getShadowStyle() {
+    if (this.container) {
+      return {
+        width: `${
+          this.container.nativeElement.getBoundingClientRect().width
+        }px`,
+        height: `${
+          this.container.nativeElement.getBoundingClientRect().height
+        }px`,
+      };
+    } else {
+      return {
+        display: 'none',
+      };
+    }
   }
 }
