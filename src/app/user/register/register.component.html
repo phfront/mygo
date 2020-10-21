@@ -1,27 +1,25 @@
-<form [formGroup]="user" class="register-container" (submit)="register()">
-  <div>
-    <span>Nome</span>
-    <input type="text" formControlName="name">
-  </div>
-  <br>
-  <div>
-    <span>Email</span>
-    <input type="text" formControlName="email">
-  </div>
-  <br>
-  <div>
-    <span>Usuário</span>
-    <input type="text" formControlName="username">
-  </div>
-  <br>
-  <div>
-    <span>Senha</span>
-    <input type="password" formControlName="password">
-  </div>
-  <br>
-  <div>
-    <button type="submit" [disabled]="!user.valid">Criar conta</button>
-    &nbsp;
-    <button (click)="backToLogin()">Voltar</button>
+<form [formGroup]="user" class="register" (submit)="register()">
+  <div class="register-container">
+    <img class="logo" src="assets/images/logo.png" alt="">
+    <div class="mygo-input">
+      <label for="name">Nome</label>
+      <input id="name" type="text" [formControl]="user.get('name')" placeholder="Nome" />
+    </div>
+    <div class="mygo-input">
+      <label for="email">Email</label>
+      <input id="email" type="text" [formControl]="user.get('email')" placeholder="Email" />
+    </div>
+    <div class="mygo-input">
+      <label for="username">Usuário</label>
+      <input id="username" type="text" [formControl]="user.get('username')" placeholder="Usuário" />
+    </div>
+    <div class="mygo-input">
+      <label for="password">Senha</label>
+      <input id="password" type="password" [formControl]="user.get('password')" placeholder="Senha" />
+    </div>
+    <div class="buttons">
+      <button class="mygo-button" type="submit" [disabled]="!user.valid">Criar conta</button>
+      <button class="mygo-button" type="button" (click)="backToLogin()">Voltar</button>
+    </div>
   </div>
 </form>

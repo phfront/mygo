@@ -1,10 +1,18 @@
-<form [formGroup]="form" class="login-container" (submit)="login()">
-  <div>
-    <h1>MYGO</h1>
-    <input class="mygo-input" type="text" [formControl]="form.get('username')" placeholder="Usuário" />
-    <input class="mygo-input" type="password" [formControl]="form.get('password')" placeholder="Senha" />
-    <button type="submit" [disabled]="!form.valid">Login</button>
-    <button type="button" (click)="register()">Registrar</button>
-    <button type="button" (click)="forgotPassword()">Esqueci minha senha</button>
+<form [formGroup]="form" class="login" (submit)="login()">
+  <div class="login-container">
+    <img class="logo" src="assets/images/logo.png" alt="">
+    <div class="mygo-input">
+      <label for="username">Usuário</label>
+      <input id="username" type="text" [formControl]="form.get('username')" placeholder="Usuário" />
+    </div>
+    <div class="mygo-input">
+      <label for="password">Senha</label>
+      <input id="password" type="password" [formControl]="form.get('password')" placeholder="Senha" />
+    </div>
+    <div class="buttons">
+      <button class="mygo-button" type="submit" [disabled]="!form.valid">Login</button>
+      <button class="mygo-button" type="button" (click)="register()">Registrar</button>
+      <a class="mygo-anchor" [routerLink]="['/user/forgot-password']">Esqueceu sua senha?</a>
+    </div>
   </div>
 </form>

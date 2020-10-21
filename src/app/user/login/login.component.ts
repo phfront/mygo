@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
+import { ThemeService } from 'src/app/shared/service/theme.service';
 import { MygoService } from 'src/app/shared/services/mygo.service';
 
 @Component({
@@ -15,9 +16,10 @@ export class LoginComponent implements OnInit {
   constructor(
     private mygoService: MygoService,
     private router: Router,
-    formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public themeService: ThemeService
   ) {
-    this.form = formBuilder.group({
+    this.form = this.formBuilder.group({
       username: [''],
       password: [''],
     });
@@ -30,7 +32,7 @@ export class LoginComponent implements OnInit {
         .pipe(take(1))
         .subscribe((response: any) => {
           if (response.success) {
-            this.router.navigate(['/user/home']);
+            this.loginComplete(false);
           }
         });
     }
@@ -44,7 +46,7 @@ export class LoginComponent implements OnInit {
         (response: any) => {
           if (response.success) {
             localStorage.setItem('token', response.token);
-            this.router.navigate(['/user/home']);
+            this.loginComplete(true);
           }
         },
         (response: { error: { errors: [] } }) => {
@@ -53,11 +55,15 @@ export class LoginComponent implements OnInit {
       );
   }
 
-  register() {
-    this.router.navigate(['/user/register']);
+  loginComplete(saveTheme) {
+    const tempTheme = localStorage.getItem('temptheme');
+    if (tempTheme && saveTheme) {
+      this.themeService.saveTheme(tempTheme);
+    }
+    this.router.navigate(['/user/home']);
   }
 
-  forgotPassword() {
-    this.router.navigate(['/user/forgot-password']);
+  register() {
+    this.router.navigate(['/user/register']);
   }
 }

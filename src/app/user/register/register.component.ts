@@ -7,7 +7,7 @@ import { MygoService } from 'src/app/shared/services/mygo.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
   user = new FormBuilder().group({

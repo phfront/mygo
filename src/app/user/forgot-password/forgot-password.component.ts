@@ -7,7 +7,7 @@ import { MygoService } from 'src/app/shared/services/mygo.service';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.css'],
+  styleUrls: ['./forgot-password.component.scss'],
 })
 export class ForgotPasswordComponent implements OnInit {
   form = new FormBuilder().group({
@@ -20,6 +20,9 @@ export class ForgotPasswordComponent implements OnInit {
 
   sendEmail() {
     const { email } = this.form.value;
+    if (!email) {
+      return alert('Email inválido');
+    }
     this.mygoService
       .forgotPassword(email)
       .pipe(take(1))

@@ -1,17 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
-
-export const yugiTheme = {
-  bgcolor: '#191a14',
-  color1: '#d7c850',
-  color2: '#b51051',
-};
-
-export const darkMagicianTheme = {
-  bgcolor: '#1f2935',
-  color1: '#455363',
-  color2: '#fff',
-};
+import { take } from 'rxjs/operators';
+import { ThemeService } from './shared/service/theme.service';
+import { MygoService } from './shared/services/mygo.service';
 
 @Component({
   selector: 'app-root',
@@ -20,9 +11,13 @@ export const darkMagicianTheme = {
 })
 export class AppComponent implements OnInit {
   currentUrl: string = '';
-  theme: string = 'theme-yugi';
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private themeService: ThemeService,
+    private mygoService: MygoService
+  ) {
+    this.currentUrl = this.router['location'].path();
     this.router.events.subscribe((route: RouterEvent) => {
       if (route.url) {
         this.currentUrl = route.url;
@@ -31,7 +26,23 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.setTheme(yugiTheme);
+    const temptheme = localStorage.getItem('temptheme');
+    if (temptheme) {
+      this.themeService.setTheme(temptheme);
+    } else {
+      this.themeService.setTheme('yugi');
+    }
+    if (this.disableHeader()) {
+      this.mygoService
+        .user()
+        .pipe(take(1))
+        .subscribe(
+          (response: any) => {
+            this.themeService.setTheme(response.user.theme);
+          },
+          (response: any) => {}
+        );
+    }
   }
 
   disableHeader() {
@@ -40,12 +51,6 @@ export class AppComponent implements OnInit {
       this.currentUrl === '/user/register' ||
       this.currentUrl === '/user/forgot-password' ||
       this.currentUrl.includes('/user/change-password/')
-    );
-  }
-
-  setTheme(theme: {}) {
-    Object.keys(theme).forEach((k) =>
-      document.documentElement.style.setProperty(`--${k}`, theme[k])
     );
   }
 }

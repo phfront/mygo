@@ -66,4 +66,12 @@ export class MygoService {
   updateMyCards(cards: IMygoCard[]) {
     return this.http.put(`${environment.mygoApi}user/mycards`, { cards });
   }
+
+  setTheme(theme: string) {
+    return this.http.put(`${environment.mygoApi}user/theme`, { theme });
+  }
+
+  getTheme() {
+    return this.http.get(`${environment.mygoApi}user/mycards`);
+  }
 }

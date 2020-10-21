@@ -1,0 +1,3 @@
+<div class="login-themes">
+  <img *ngFor="let theme of themeList" [src]="themeService.themeList[theme].iconPath" alt="" (click)="setTheme(theme)">
+</div>

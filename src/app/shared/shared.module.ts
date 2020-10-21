@@ -12,6 +12,7 @@ import { CardSearchMoveComponent } from './components/card-search-move/card-sear
 import { MygoService } from './services/mygo.service';
 import { HttpInterceptorService } from '../core/http-interceptor.service';
 import { ComponentsModule } from '../components/components.module';
+import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ComponentsModule } from '../components/components.module';
     CardSearchMoveComponent,
     CardListComponent,
     CardPreviewComponent,
+    ThemeSelectorComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +39,7 @@ import { ComponentsModule } from '../components/components.module';
     FormsModule,
     ReactiveFormsModule,
     ComponentsModule,
+    ThemeSelectorComponent,
   ],
   providers: [
     YgoprodeckService,

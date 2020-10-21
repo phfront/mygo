@@ -1,7 +1,21 @@
 @import "./assets/css/components/input.scss";
+@import "./assets/css/components/button.scss";
+@import "./assets/css/components/anchor.scss";
+
+@font-face {
+  font-family: "mygo";
+  // src: url("./assets/font/VisueltPro-Black.ttf");
+  // src: url("./assets/font/VisueltPro-Bold.ttf");
+  // src: url("./assets/font/VisueltPro-Light.ttf");
+  // src: url("./assets/font/VisueltPro-Medium.ttf");
+  src: url("./assets/font/VisueltPro-Regular.ttf");
+  // src: url("./assets/font/VisueltPro-Thin.ttf");
+  // src: url("./assets/font/");
+}
 
 * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+  font-family: mygo;
 }
