@@ -9,21 +9,23 @@ export const create = attribute => {
       return el;
     },
     itemMouseDown: function (event) {
-      if (event.target.parentElement.hasAttribute('insert-mode')) {
-        this.moving = false;
-      } else {
-        this.moving = true;
-        if (event.target.parentElement.hasAttribute('extract-mode')) {
-          const clone = event.target.cloneNode(true);
-          clone.addEventListener('mousedown', this.itemMouseDown.bind(this));
-          event.target.parentElement.insertBefore(clone, event.target.nextSibling);
+      if (event.which === 1) {
+        if (event.target.parentElement.hasAttribute('insert-mode')) {
+          this.moving = false;
+        } else {
+          this.moving = true;
+          if (event.target.parentElement.hasAttribute('extract-mode')) {
+            const clone = event.target.cloneNode(true);
+            clone.addEventListener('mousedown', this.itemMouseDown.bind(this));
+            event.target.parentElement.insertBefore(clone, event.target.nextSibling);
+          }
+          event.target.addEventListener('mousemove', this.itemMouseMove.bind(this));
+          event.target.addEventListener('mouseup', this.itemMouseUp.bind(this));
+          event.target.style.top = `${event.target.getBoundingClientRect().top}px`;
+          event.target.style.left = `${event.target.getBoundingClientRect().left}px`;
+          event.target.style.position = 'fixed';
+          event.target.style.zIndex = 10;
         }
-        event.target.addEventListener('mousemove', this.itemMouseMove.bind(this));
-        event.target.addEventListener('mouseup', this.itemMouseUp.bind(this));
-        event.target.style.top = `${event.target.getBoundingClientRect().top}px`;
-        event.target.style.left = `${event.target.getBoundingClientRect().left}px`;
-        event.target.style.position = 'fixed';
-        event.target.style.zIndex = 10;
       }
     },
     itemMouseMove: function (event) {
@@ -85,6 +87,8 @@ export const create = attribute => {
           } else {
             extractMode = true;
           }
+        } else if (event.target.parentElement.hasAttribute('extract-mode')) {
+          extractMode = true;
         }
         event.target.style.removeProperty('top');
         event.target.style.removeProperty('left');
