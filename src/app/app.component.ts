@@ -47,6 +47,8 @@ export class AppComponent implements OnInit {
 
   disableHeader() {
     return !(
+      this.currentUrl === '' ||
+      this.currentUrl === '/' ||
       this.currentUrl === '/user/login' ||
       this.currentUrl === '/user/register' ||
       this.currentUrl === '/user/forgot-password' ||
