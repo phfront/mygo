@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
 import { ThemeService } from '../../services/theme.service';
 
@@ -8,6 +8,7 @@ import { ThemeService } from '../../services/theme.service';
   styleUrls: ['./theme-selector.component.scss'],
 })
 export class ThemeSelectorComponent implements OnInit {
+  @Input() fixed: boolean = false;
   themeList = [];
   currentUrl: string = '';
 

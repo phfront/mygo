@@ -7,7 +7,7 @@ import { MygoService } from 'src/app/shared/services/mygo.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
   user: IMygoUser;
@@ -23,16 +23,10 @@ export class HomeComponent implements OnInit {
     this.mygoService
       .user()
       .pipe(take(1))
-      .subscribe(
-        (response: any) => {
-          this.user = response.user;
-          this.getDecks();
-        },
-        (response: any) => {
-          this.mygoService.logout();
-          this.router.navigate(['/user/login']);
-        }
-      );
+      .subscribe((response: any) => {
+        this.user = response.user;
+        this.getDecks();
+      });
   }
 
   getDecks() {

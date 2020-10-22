@@ -1,1 +1,7 @@
-<button (click)="logout()">Sair</button>
+<div class="header fixed">
+  <img class="logo" src="assets/images/logo.png" alt="" (click)="goHome()">
+  <span class="space"></span>
+  <app-theme-selector [fixed]="true"></app-theme-selector>
+  <button class="mygo-button logout" (click)="logout()">Sair</button>
+  <p class="logged-user" *ngIf="user">{{ user.name }}</p>
+</div>

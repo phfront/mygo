@@ -12,7 +12,6 @@ export class MygoLoadingService {
   showLoading(message: string = '') {
     this.show = true;
     this.message = message;
-    console.log('show');
   }
 
   hideLoading() {

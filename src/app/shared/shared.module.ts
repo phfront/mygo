@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { YgoprodeckService } from './services/ygoprodeck.service';
-import { CaptureComponent } from './components/capture/capture.component';
 import { CardPreviewComponent } from './components/card-preview/card-preview.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeckService } from './services/deck.service';
@@ -16,7 +15,6 @@ import { ThemeSelectorComponent } from './components/theme-selector/theme-select
 
 @NgModule({
   declarations: [
-    CaptureComponent,
     CardSearchComponent,
     CardSearchMoveComponent,
     CardListComponent,
@@ -32,7 +30,6 @@ import { ThemeSelectorComponent } from './components/theme-selector/theme-select
   ],
   exports: [
     CommonModule,
-    CaptureComponent,
     CardSearchComponent,
     CardSearchMoveComponent,
     CardPreviewComponent,

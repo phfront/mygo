@@ -62,13 +62,6 @@ export class MyCardsComponent implements OnInit {
     this.mygoService
       .updateMyCards(this.cards)
       .pipe(take(1))
-      .subscribe(
-        (response: any) => {
-          console.log(response);
-        },
-        (response: any) => {
-          console.log(response);
-        }
-      );
+      .subscribe((response: any) => {});
   }
 }

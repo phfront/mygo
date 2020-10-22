@@ -11,7 +11,6 @@
   background-position-x: 5vw;
 
   .register-container {
-    // border: 3px solid var(--color2);
     padding: 20px;
     display: grid;
     grid-template-columns: 1fr;
@@ -46,6 +45,53 @@
       a {
         grid-column: 1 / span 2;
         text-align: center;
+      }
+    }
+  }
+}
+
+// responsive
+.register {
+  @media screen and (max-width: 1300px) {
+    background-position-x: 0vw;
+  }
+
+  @media screen and (max-width: 900px) {
+    background-position: bottom center;
+  }
+
+  .register-container {
+    @media screen and (max-width: 1200px) {
+      background-position-x: 0vw;
+      right: 15vw;
+    }
+
+    @media screen and (max-width: 1100px) {
+      background-position-x: 0vw;
+      right: 5vw;
+    }
+
+    @media screen and (max-width: 900px) {
+      background-position-x: 0vw;
+      right: inherit;
+      position: relative;
+      background: rgba(0, 0, 0, 0.7);
+      width: 100%;
+      max-width: 350px;
+    }
+
+    .mygo-input {
+      label {
+        @media screen and (max-width: 900px) {
+          width: 130px;
+          font-size: 14px;
+        }
+      }
+
+      input {
+        @media screen and (max-width: 900px) {
+          width: 200px;
+        }
       }
     }
   }

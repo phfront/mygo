@@ -36,8 +36,6 @@ export class MygoLoadingComponent implements OnInit, OnDestroy {
 
   private start() {
     this.interval = setInterval(() => {
-      console.log(new Date().getTime());
-
       if (this.cards.length > this.numOfCards * this.multiplier) {
         this.cards = [];
       } else {

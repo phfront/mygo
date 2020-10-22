@@ -1,11 +1,17 @@
-.login-themes {
+.themes {
   position: fixed;
-  right: 10px;
-  bottom: 10px;
+  top: 5px;
+  right: 5px;
+
+  &.fixed {
+    top: inherit;
+    right: inherit;
+    position: inherit;
+  }
 
   img {
-    width: 120px;
-    height: 120px;
+    width: 55px;
+    height: 55px;
     transition: all 0.3s;
     cursor: pointer;
 

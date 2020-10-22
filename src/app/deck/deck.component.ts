@@ -32,7 +32,6 @@ export class DeckComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.pipe(take(1)).subscribe((params) => {
       if (params.deckId) {
-        console.log(params.deckId);
         this.getDeck(params.deckId);
       } else {
         this.router.navigate(['/user/login']);

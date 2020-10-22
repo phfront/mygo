@@ -4,7 +4,6 @@ import { take } from 'rxjs/operators';
 import { ThemeService } from './shared/services/theme.service';
 import { MygoService } from './shared/services/mygo.service';
 import { MygoLoadingService } from './core/mygo-loading/mygo-loading.service';
-import { MygoMessageService } from './core/mygo-message/mygo-message.service';
 
 @Component({
   selector: 'app-root',
