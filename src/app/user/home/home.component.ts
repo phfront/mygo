@@ -29,7 +29,6 @@ export class HomeComponent implements OnInit {
           this.getDecks();
         },
         (response: any) => {
-          alert(response.error.errors.join('|'));
           this.mygoService.logout();
           this.router.navigate(['/user/login']);
         }
@@ -40,14 +39,9 @@ export class HomeComponent implements OnInit {
     this.mygoService
       .myDecks()
       .pipe(take(1))
-      .subscribe(
-        (response: any) => {
-          this.decks = response.decks;
-        },
-        (response: any) => {
-          alert(response.error.errors.join('|'));
-        }
-      );
+      .subscribe((response: any) => {
+        this.decks = response.decks;
+      });
   }
 
   editDeck(deck: IMygoDeck) {

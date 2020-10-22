@@ -1,0 +1,6 @@
+<img class="img-message" [src]="messageImage[mygoMessageService.messageType]" alt=""
+  [ngClass]="{ messageshow: mygoMessageService.show && mygoMessageService.dirty, messagehide: !mygoMessageService.show && mygoMessageService.dirty }">
+<div class="img-message img-message-text {{ mygoMessageService.messageType }}"
+  [ngClass]="{ messageshow: mygoMessageService.show && mygoMessageService.dirty, messagehide: !mygoMessageService.show && mygoMessageService.dirty }">
+  {{ mygoMessageService.message }}
+</div>

@@ -30,19 +30,10 @@ export class RegisterComponent implements OnInit {
         this.user.get('password').value
       )
       .pipe(take(1))
-      .subscribe(
-        (response: any) => {
-          if (response.success) {
-            this.backToLogin();
-            alert('Usuário criado com sucesso');
-          } else {
-            alert(response.errors.join('|'));
-          }
-        },
-        (response: any) => {
-          alert(response.error.errors.join('|'));
-        }
-      );
+      .subscribe((response: any) => {
+        this.backToLogin();
+        alert('Usuário criado com sucesso');
+      });
   }
 
   backToLogin() {

@@ -44,15 +44,10 @@ export class DeckComponent implements OnInit {
     this.mygoService
       .deck(deckId)
       .pipe(take(1))
-      .subscribe(
-        (response: any) => {
-          this.deck = response.deck;
-          this.initMove();
-        },
-        (response: any) => {
-          alert(response.error.errors.join('|'));
-        }
-      );
+      .subscribe((response: any) => {
+        this.deck = response.deck;
+        this.initMove();
+      });
   }
 
   importDeck() {

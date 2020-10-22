@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
-import { ThemeService } from '../../service/theme.service';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-theme-selector',

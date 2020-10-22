@@ -28,27 +28,6 @@ export class ThemeService {
       );
       this.themeSubscribers.next(themeString);
       localStorage.setItem('temptheme', themeString);
-      // const url = this.router['location'].path();
-      // if (
-      //   url === '/user/login' ||
-      //   url === '/user/register' ||
-      //   url === '/user/forgot-password' ||
-      //   url.includes('/user/change-password/')
-      // ) {
-      //   localStorage.setItem('temptheme', themeString);
-      // } else {
-      //   if (save) {
-      //     this.mygoService
-      //       .setTheme(themeString)
-      //       .pipe(take(1))
-      //       .subscribe(
-      //         (response: any) => {},
-      //         (response: { error: { errors: [] } }) => {
-      //           alert(response.error.errors.join(' | '));
-      //         }
-      //       );
-      //   }
-      // }
     }
   }
 
@@ -57,11 +36,6 @@ export class ThemeService {
     this.mygoService
       .setTheme(themeString)
       .pipe(take(1))
-      .subscribe(
-        (response: any) => {},
-        (response: { error: { errors: [] } }) => {
-          alert(response.error.errors.join(' | '));
-        }
-      );
+      .subscribe((response: any) => {});
   }
 }

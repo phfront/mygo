@@ -21,15 +21,10 @@ export class MyCardsComponent implements OnInit {
     this.mygoService
       .myCards()
       .pipe(take(1))
-      .subscribe(
-        (response: any) => {
-          this.cards = response.cards;
-          this.filterList();
-        },
-        (response: any) => {
-          alert(response.error.errors.join('|'));
-        }
-      );
+      .subscribe((response: any) => {
+        this.cards = response.cards;
+        this.filterList();
+      });
   }
 
   removeCard(card: IMygoCard) {
@@ -75,14 +70,5 @@ export class MyCardsComponent implements OnInit {
           console.log(response);
         }
       );
-    //   this.myCardsService
-    //     .update(this.cards)
-    //     .pipe(take(1))
-    //     .subscribe(
-    //       (response: any) => {
-    //         alert(response.success ? 'Lista salva' : 'Erro ao salvar lista');
-    //       },
-    //       (error) => alert('Erro ao salvar lista')
-    //     );
   }
 }

@@ -36,19 +36,10 @@ export class ChangePasswordComponent implements OnInit {
     this.mygoService
       .changePassword(hash, password, confirmPassword)
       .pipe(take(1))
-      .subscribe(
-        (response: any) => {
-          if (response.success) {
-            alert('Senha alterada com sucesso');
-            this.backToLogin();
-          } else {
-            alert(response.errors.join('|'));
-          }
-        },
-        (response: any) => {
-          alert(response.error.errors.join('|'));
-        }
-      );
+      .subscribe((response: any) => {
+        alert('Senha alterada com sucesso');
+        this.backToLogin();
+      });
   }
 
   backToLogin() {

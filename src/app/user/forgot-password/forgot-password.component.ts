@@ -26,20 +26,9 @@ export class ForgotPasswordComponent implements OnInit {
     this.mygoService
       .forgotPassword(email)
       .pipe(take(1))
-      .subscribe(
-        (response: any) => {
-          if (response.success) {
-            alert(
-              'Foi enviado para seu email um link para criar uma nova senha'
-            );
-          } else {
-            alert(response.errors.join('|'));
-          }
-        },
-        (response: any) => {
-          alert(response.error.errors.join('|'));
-        }
-      );
+      .subscribe((response: any) => {
+        alert('Foi enviado para seu email um link para criar uma nova senha');
+      });
   }
 
   backToLogin() {

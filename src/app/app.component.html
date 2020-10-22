@@ -3,4 +3,6 @@
   </app-header>
   <app-theme-selector></app-theme-selector>
   <router-outlet></router-outlet>
+  <app-mygo-loading *ngIf="mygoLoadingService.show"></app-mygo-loading>
+  <app-mygo-message></app-mygo-message>
 </div>

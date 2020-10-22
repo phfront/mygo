@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
-import { ThemeService } from 'src/app/shared/service/theme.service';
+import { ThemeService } from 'src/app/shared/services/theme.service';
 import { MygoService } from 'src/app/shared/services/mygo.service';
 
 @Component({
@@ -42,17 +42,12 @@ export class LoginComponent implements OnInit {
     this.mygoService
       .login(this.form.get('username').value, this.form.get('password').value)
       .pipe(take(1))
-      .subscribe(
-        (response: any) => {
-          if (response.success) {
-            localStorage.setItem('token', response.token);
-            this.loginComplete(true);
-          }
-        },
-        (response: { error: { errors: [] } }) => {
-          alert(response.error.errors.join(' | '));
+      .subscribe((response: any) => {
+        if (response.success) {
+          localStorage.setItem('token', response.token);
+          this.loginComplete(true);
         }
-      );
+      });
   }
 
   loginComplete(saveTheme) {

@@ -1,0 +1,46 @@
+.img-message {
+  position: fixed;
+  top: 10px;
+  left: -400px;
+  width: 400px;
+  height: 582px;
+}
+
+.img-message-text {
+  display: flex;
+  height: 582px;
+  padding: 445px 40px 40px 40px;
+  color: black;
+  font-size: 20px;
+
+  &.info,
+  &.warning {
+    padding-top: 460px;
+  }
+}
+
+.messageshow {
+  animation: messageshow 0.5s forwards;
+}
+
+@keyframes messageshow {
+  from {
+    left: -400px;
+  }
+  to {
+    left: 10px;
+  }
+}
+
+.messagehide {
+  animation: messagehide 0.5s forwards;
+}
+
+@keyframes messagehide {
+  from {
+    left: 10px;
+  }
+  to {
+    left: -400px;
+  }
+}

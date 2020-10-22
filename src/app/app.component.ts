@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
 import { take } from 'rxjs/operators';
-import { ThemeService } from './shared/service/theme.service';
+import { ThemeService } from './shared/services/theme.service';
 import { MygoService } from './shared/services/mygo.service';
+import { MygoLoadingService } from './core/mygo-loading/mygo-loading.service';
+import { MygoMessageService } from './core/mygo-message/mygo-message.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +17,8 @@ export class AppComponent implements OnInit {
   constructor(
     private router: Router,
     private themeService: ThemeService,
-    private mygoService: MygoService
+    private mygoService: MygoService,
+    public mygoLoadingService: MygoLoadingService
   ) {
     this.currentUrl = this.router['location'].path();
     this.router.events.subscribe((route: RouterEvent) => {

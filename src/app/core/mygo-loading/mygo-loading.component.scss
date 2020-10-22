@@ -1,0 +1,36 @@
+.loading-shadow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    color: white;
+    margin-top: -500px;
+  }
+}
+
+.loading-card {
+  width: 200px;
+  height: 300px;
+  background: #5d2607;
+  border: 10px solid #ea9842;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 1px 1px 0px 0px #bc762d;
+  position: fixed;
+  transform: perspective(1000px) rotateY(-20deg) rotateX(65deg);
+
+  div {
+    width: 70px;
+    height: 130px;
+    background: #0c0c0c;
+    border-radius: 100%;
+  }
+}
