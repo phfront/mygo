@@ -1,9 +1,11 @@
 <div class="card-preview" *ngIf="card">
-  <img class="big-image" [src]="bigImage" alt="">
-  <div class="images-small">
-    <img *ngFor="let img of card.card_images" [src]="img.image_url_small" alt="" (click)="setBigImage(img)">
+  <div class="images">
+    <img class="big-image" [src]="bigImage" alt="">
+    <div class="images-small">
+      <img *ngFor="let img of card.card_images" [src]="img.image_url_small" alt="" (click)="setBigImage(img)">
+    </div>
   </div>
-  <div>
+  <div class="info">
     <p *ngIf="card.name"><span>Nome:</span> {{ card.name }}</p>
     <p *ngIf="card.type"><span>Tipo:</span> {{ card.type }}</p>
     <p *ngIf="card.atk"><span>ATK:</span> {{ card.atk }}</p>
@@ -16,13 +18,13 @@
     <div class="card-prices">
       <div class="card-price" *ngFor="let price of card.card_prices">
         <h3>Preço</h3>
-        <!-- <ul>
+        <ul>
           <li>Card Market: {{ price.cardmarket_price }}</li>
           <li>TCG: {{ price.tcgplayer_price }}</li>
           <li>Ebay: {{ price.ebay_price }}</li>
           <li>Amazon: {{ price.amazon_price }}</li>
           <li>Cool Stuff Inc: {{ price.coolstuffinc_price }}</li>
-        </ul> -->
+        </ul>
       </div>
     </div>
     <div class="description">

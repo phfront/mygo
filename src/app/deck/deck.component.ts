@@ -11,7 +11,7 @@ import { IMygoDeck } from '../shared/interfaces/mygoapi';
 @Component({
   selector: 'app-deck',
   templateUrl: './deck.component.html',
-  styleUrls: ['./deck.component.css'],
+  styleUrls: ['./deck.component.scss'],
 })
 export class DeckComponent implements OnInit {
   @ViewChild('inputImportDeck') inputImportDeck: ElementRef;
@@ -45,6 +45,16 @@ export class DeckComponent implements OnInit {
       .pipe(take(1))
       .subscribe((response: any) => {
         this.deck = response.deck;
+        this.cardPreview = this.deck.main[0];
+        this.cardPreview.card_images.push(this.deck.main[1].card_images[0]);
+        this.cardPreview.card_images.push(this.deck.main[2].card_images[0]);
+        this.cardPreview.card_images.push(this.deck.main[3].card_images[0]);
+        this.cardPreview.card_images.push(this.deck.main[4].card_images[0]);
+        this.cardPreview.card_images.push(this.deck.main[5].card_images[0]);
+        this.cardPreview.card_images.push(this.deck.main[6].card_images[0]);
+        this.cardPreview.card_images.push(this.deck.main[7].card_images[0]);
+        this.cardPreview.card_images.push(this.deck.main[8].card_images[0]);
+        this.cardPreview.card_images.push(this.deck.main[9].card_images[0]);
         this.initMove();
       });
   }

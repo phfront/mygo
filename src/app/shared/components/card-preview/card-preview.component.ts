@@ -12,7 +12,7 @@ import { YPDCardList, YPDCardListImage } from '../../interfaces/ygoprodeck';
 @Component({
   selector: 'app-card-preview',
   templateUrl: './card-preview.component.html',
-  styleUrls: ['./card-preview.component.css'],
+  styleUrls: ['./card-preview.component.scss'],
 })
 export class CardPreviewComponent implements OnInit, OnChanges {
   @Input() card: YPDCardList;

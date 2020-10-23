@@ -5,10 +5,14 @@
 .deck-container {
   border: 1px solid black;
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .deck-section {
   border: 1px solid black;
+  flex-grow: 1;
 }
 
 .deck-header {
@@ -18,19 +22,18 @@
 }
 
 .deck-cards {
-  display: grid;
-  grid-template-columns: repeat(13, 1fr);
-  gap: 5px;
+  display: flex;
+  flex-wrap: wrap;
   padding: 5px;
 }
 
-.deck-cards img {
-  width: 100%;
-  height: auto;
+::ng-deep .card-to,
+.deck-cards div {
+  margin-right: 5px;
+  margin-bottom: 5px;
 }
 
-.card-move,
-.card-to {
-  width: 56.61px !important;
-  height: 82.89px !important;
+::ng-deep .card-to {
+  background: var(--color1);
+  opacity: 0.5;
 }

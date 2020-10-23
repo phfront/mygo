@@ -1,8 +1,19 @@
-<div class="active-deck" *ngIf="deck">
-  <h1>{{ deck.name }}</h1>
-  <app-card-preview class="active-deck-preview" [card]="cardPreview"></app-card-preview>
-  <app-active-deck class="active-deck-cards" (cardHover)="cardPreview = $event" [deck]="deck">
-  </app-active-deck>
+<div class="deck-container">
+  <div class="deck-grid">
+    <div class="deck-grid-item card-preview">
+      <app-card-preview class="active-deck-preview" [card]="cardPreview"></app-card-preview>
+    </div>
+    <div class="deck-grid-item deck-info">
+      <h1>{{ deck.name }}</h1>
+    </div>
+    <div class="deck-grid-item deck">
+      <app-active-deck class="active-deck-cards" (cardHover)="cardPreview = $event" [deck]="deck">
+      </app-active-deck>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="active-deck" *ngIf="deck">
   <app-card-search-move class="active-deck-search" (cardHover)="cardPreview = $event"
     (searchEvent)="searchEvent($event)" [moveattribute]="areaMoveAttribute"></app-card-search-move>
-</div>
+</div> -->

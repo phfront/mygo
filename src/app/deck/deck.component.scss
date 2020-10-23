@@ -1,0 +1,35 @@
+.deck-container {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - var(--header-height));
+  padding: 20px;
+
+  .deck-grid {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+      "deck-info deck deck"
+      "card-preview deck deck"
+      "card-preview deck deck";
+
+    .deck-grid-item {
+      border: 3px solid var(--color1);
+    }
+  }
+
+  .card-preview {
+    grid-area: card-preview;
+  }
+
+  .deck-info {
+    grid-area: deck-info;
+  }
+
+  .deck {
+    grid-area: deck;
+  }
+}

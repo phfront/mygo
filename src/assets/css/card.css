@@ -1,12 +1,21 @@
+:root {
+  --card-width: 56.61px;
+  --card-height: 82.89px;
+}
+
 .card-from {
   background-color: transparent;
 }
 
 .card-to {
   background-color: lightgreen;
+  width: var(--card-width) !important;
+  height: var(--card-height) !important;
 }
 
 .card-move {
   background-size: cover;
   user-select: none;
+  width: var(--card-width) !important;
+  height: var(--card-height) !important;
 }

@@ -1,0 +1,32 @@
+.card-preview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  .images {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+
+    .big-image {
+      width: 100%;
+    }
+
+    .images-small {
+      display: flex;
+      justify-content: flex-start;
+      padding: 10px;
+      max-width: 100%;
+      flex-wrap: wrap;
+      overflow: auto;
+      height: calc(var(--card-height) + 30px);
+
+      img {
+        width: var(--card-width);
+        height: var(--card-height);
+        cursor: pointer;
+        margin-right: 5px;
+        margin-bottom: 5px;
+      }
+    }
+  }
+}

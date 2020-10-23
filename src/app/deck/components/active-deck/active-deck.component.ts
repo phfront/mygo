@@ -5,7 +5,7 @@ import { Deck, YPDCardList } from 'src/app/shared/interfaces/ygoprodeck';
 @Component({
   selector: 'app-active-deck',
   templateUrl: './active-deck.component.html',
-  styleUrls: ['./active-deck.component.css'],
+  styleUrls: ['./active-deck.component.scss'],
 })
 export class ActiveDeckComponent implements OnInit {
   @Input() deck: IMygoDeck;
