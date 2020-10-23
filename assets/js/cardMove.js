@@ -9,22 +9,24 @@ export const create = attribute => {
       return el;
     },
     itemMouseDown: function (event) {
-      if (event.which === 1) {
-        if (event.target.parentElement.hasAttribute('insert-mode')) {
-          this.moving = false;
-        } else {
-          this.moving = true;
-          if (event.target.parentElement.hasAttribute('extract-mode')) {
-            const clone = event.target.cloneNode(true);
-            clone.addEventListener('mousedown', this.itemMouseDown.bind(this));
-            event.target.parentElement.insertBefore(clone, event.target.nextSibling);
+      if (event.target.hasAttribute(`${this.attribute}-item`)) {
+        if (event.which === 1) {
+          if (event.target.parentElement.hasAttribute('insert-mode')) {
+            this.moving = false;
+          } else {
+            this.moving = true;
+            if (event.target.parentElement.hasAttribute('extract-mode')) {
+              const clone = event.target.cloneNode(true);
+              clone.addEventListener('mousedown', this.itemMouseDown.bind(this));
+              event.target.parentElement.insertBefore(clone, event.target.nextSibling);
+            }
+            event.target.addEventListener('mousemove', this.itemMouseMove.bind(this));
+            event.target.addEventListener('mouseup', this.itemMouseUp.bind(this));
+            event.target.style.top = `${event.target.getBoundingClientRect().top}px`;
+            event.target.style.left = `${event.target.getBoundingClientRect().left}px`;
+            event.target.style.position = 'fixed';
+            event.target.style.zIndex = 10;
           }
-          event.target.addEventListener('mousemove', this.itemMouseMove.bind(this));
-          event.target.addEventListener('mouseup', this.itemMouseUp.bind(this));
-          event.target.style.top = `${event.target.getBoundingClientRect().top}px`;
-          event.target.style.left = `${event.target.getBoundingClientRect().left}px`;
-          event.target.style.position = 'fixed';
-          event.target.style.zIndex = 10;
         }
       }
     },
@@ -134,6 +136,22 @@ export const create = attribute => {
         that.initArea(that, area, i);
       });
       that.doEvents.init(that);
+    },
+    stopArea: function (that, area, areaId) {
+      for (let i = 0; i < area.children.length; i++) {
+        const child = area.children[i];
+        child.removeAttribute(`${this.attribute}-item`);
+        child.removeAttribute(`${this.attribute}-id`);
+        child.removeAttribute(`${this.attribute}-item-id`);
+        child.removeEventListener('mousedown', that.itemMouseDown);
+      }
+    },
+    stopCardMove: function (that) {
+      that.cardMoveAreas = document.querySelectorAll('[' + that.attribute + ']');
+      that.cardMoveAreas.forEach((area, i) => {
+        area.removeAttribute(`${this.attribute}-id`);
+        that.stopArea(that, area, i);
+      });
     },
     events: {
       init: null,
